@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2018-01-11 10:36:21
+-- Generation Time: 2018-01-13 15:55:40
 -- 服务器版本： 5.7.20
 -- PHP Version: 5.5.37
 
@@ -70,6 +70,28 @@ INSERT INTO `news` (`id`, `title`, `description`, `iconAddress`, `webUrl`) VALUE
 (6, '《额尔古纳河右岸》', '驯鹿民族的“百年孤独”', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515591265417&di=eeff64af7d2eca28c586c879230e4ca9&imgtype=0&src=http%3A%2F%2Fpic.lvmama.com%2Fuploads%2Fpc%2Fplace2%2F2017-04-05%2F3eed2a16-e4bf-4c92-abb1-adbb0a66e0c2.jpg', 'http://192.168.1.100:8080/resources/news/news6.jsp'),
 (7, '《唤醒内在的智慧》', '改变自己的人生道路与提升自我意识', 'http://www.book110.com/wp/wp-content/uploads/2015/12/470_120514110542_1.jpg', 'http://192.168.1.100:8080/resources/news/news7.jsp');
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `account` varchar(20) COLLATE utf8_bin NOT NULL,
+  `pwd` varchar(20) COLLATE utf8_bin NOT NULL,
+  `username` varchar(20) COLLATE utf8_bin NOT NULL,
+  `gender` char(2) COLLATE utf8_bin NOT NULL DEFAULT '男',
+  `phone` char(11) COLLATE utf8_bin NOT NULL,
+  `headshot` varchar(200) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`account`, `pwd`, `username`, `gender`, `phone`, `headshot`) VALUES
+('18751103565', 'aslongas1113', 'xmfy', '男', '18751103565', '');
+
 --
 -- Indexes for dumped tables
 --
@@ -85,6 +107,12 @@ ALTER TABLE `carousel`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`account`);
 
 --
 -- AUTO_INCREMENT for dumped tables
