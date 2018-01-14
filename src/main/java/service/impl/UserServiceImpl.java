@@ -5,6 +5,7 @@ import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.UserService;
+import tool.FormedData;
 
 /**
  * Created by xmfy on 2018/1/13.
@@ -19,4 +20,12 @@ public class UserServiceImpl implements UserService{
     public int registerUser(User user) {
         return dao.insertUser(user);
     }
+
+    @Override
+    public FormedData<User> loginUser(String account, String pwd) {
+        User user = dao.selectUser(account, pwd);
+        return user==null?new FormedData<>(false, "账号或密码不正确") : new FormedData<User>(true, user);
+    }
+
+
 }

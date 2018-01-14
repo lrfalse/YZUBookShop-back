@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Param;
 public interface UserDao {
 
     int insertUser(@Param("user") User user);
+
+    User selectUser(@Param("account")String account, @Param("pwd") String pwd);
 }

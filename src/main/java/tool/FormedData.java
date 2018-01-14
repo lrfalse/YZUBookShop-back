@@ -47,7 +47,7 @@ public class FormedData<T> {
 
     @Override
     public String toString() {
-        return "ExamResult{" +
+        return "FormedResult{" +
                 "success=" + success +
                 ", data=" + data +
                 ", error='" + error + '\'' +

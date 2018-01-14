@@ -20,5 +20,11 @@
         INSERT INTO user(account, pwd, username, gender, phone, headshot)
         VALUES(#{user.account}, #{user.pwd}, #{user.username}, #{user.gender}, #{user.phone}, #{user.headshot})
     </insert>
+    <select id="selectUser" resultType="entity.User">
+        SELECT *
+        FROM user
+        WHERE account = #{account} and pwd = #{pwd}
+    </select>
+
 
 </mapper>
