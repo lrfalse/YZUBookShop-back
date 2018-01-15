@@ -17,26 +17,85 @@
     <schema id="12" name="sys"/>
     <schema id="13" name="YiMo"/>
     <table id="14" parent="1" name="carousel"/>
-    <column id="15" parent="14" name="id">
+    <table id="15" parent="1" name="news"/>
+    <table id="16" parent="1" name="user"/>
+    <column id="17" parent="14" name="id">
       <comment>唯一标识符&amp;&amp;顺序</comment>
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="16" parent="14" name="title">
+    <column id="18" parent="14" name="title">
       <comment>轮播标题</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(30)|0</data-type>
       <default-expression>&apos;这是轮播的标题&apos;</default-expression>
     </column>
-    <column id="17" parent="14" name="path">
+    <column id="19" parent="14" name="path">
       <comment>轮播标题</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
       <default-expression>&apos;这是轮播图片的地址&apos;</default-expression>
     </column>
-    <key id="18" parent="14" name="PRIMARY">
+    <key id="20" parent="14" name="PRIMARY">
       <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="21" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="22" parent="15" name="title">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+      <default-expression>&apos;标题1&apos;</default-expression>
+    </column>
+    <column id="23" parent="15" name="description">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+      <default-expression>&apos;简介1&apos;</default-expression>
+    </column>
+    <column id="24" parent="15" name="iconAddress">
+      <mandatory>1</mandatory>
+      <data-type>varchar(250)|0</data-type>
+      <default-expression>&apos;http://192.168.1.100:8080/resources/pics/carousel/1.jpg&apos;</default-expression>
+    </column>
+    <column id="25" parent="15" name="webUrl">
+      <mandatory>1</mandatory>
+      <data-type>varchar(150)|0</data-type>
+    </column>
+    <key id="26" parent="15" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="27" parent="16" name="account">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="28" parent="16" name="pwd">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="29" parent="16" name="username">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="30" parent="16" name="gender">
+      <mandatory>1</mandatory>
+      <data-type>char(2)|0</data-type>
+      <default-expression>&apos;男&apos;</default-expression>
+    </column>
+    <column id="31" parent="16" name="phone">
+      <mandatory>1</mandatory>
+      <data-type>char(11)|0</data-type>
+    </column>
+    <column id="32" parent="16" name="headshot">
+      <mandatory>1</mandatory>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <key id="33" parent="16" name="PRIMARY">
+      <columns>account</columns>
       <primary>1</primary>
     </key>
   </database-model>

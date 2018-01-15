@@ -4,6 +4,7 @@ import dao.UserDao;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.UserService;
 import tool.FormedData;
 
@@ -15,6 +16,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao dao;
+
+    @Override
+    @Transactional
+    public int updateUser(String key, String value, String account) {
+        return dao.updateUser(key, value, account);
+    }
 
     @Override
     public int registerUser(User user) {

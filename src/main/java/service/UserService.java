@@ -8,6 +8,8 @@ import tool.FormedData;
  */
 public interface UserService {
 
+    int updateUser(String key, String value, String account);
+
     int registerUser(User user);
 
     FormedData<User> loginUser(String account, String pwd);

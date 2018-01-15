@@ -24,7 +24,6 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public int registerUser(@ModelAttribute("user") User user){
-        System.out.println("注册用户: "+user);
         return userService.registerUser(user);
     }
 
@@ -34,5 +33,11 @@ public class UserController {
         FormedData data = userService.loginUser(account, pwd);
         System.out.println(data);
         return data;
+    }
+    @RequestMapping(value = "update", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<Integer> updateUser(@Param("key") String key, @Param("value") String value,  @Param("account") String account){
+        Integer res = userService.updateUser(key, value, account);
+        return res == 1? new FormedData<Integer>(true,1) : new FormedData<Integer>(false, "数据库错误");
     }
 }

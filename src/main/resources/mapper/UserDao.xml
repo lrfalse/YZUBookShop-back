@@ -26,5 +26,11 @@
         WHERE account = #{account} and pwd = #{pwd}
     </select>
 
+    <update id="updateUser" parameterType="java.lang.String">
+        UPDATE user
+        SET ${key} = #{value}
+        WHERE account = #{account}
+    </update>
+
 
 </mapper>
