@@ -19,6 +19,10 @@
     <sql id="Base_Column_List" >
         id, account, receiver, phone, province, city, district, location, defaults
     </sql>
+    <delete id="deleteDeliveryById">
+        DELETE FROM delivery
+        WHERE id = #{id}
+    </delete>
     <select id="getDeliveryList" resultType="entity.Delivery">
         SELECT <include refid="Base_Column_List"/>
         FROM delivery
@@ -35,6 +39,26 @@
         SET defaults = 0
         WHERE account = #{account} AND id != #{id}
     </update>
+    <update id="setAllDefaultFalse">
+        UPDATE delivery
+        SET defaults = 0
+        WHERE account = #{account}
+    </update>
+    <update id="updateDelivery">
+        UPDATE delivery
+        SET receiver = #{Delivery.receiver},
+         phone = #{Delivery.phone},
+          province = #{Delivery.province},
+          city = #{Delivery.city},
+          district = #{Delivery.district},
+          location = #{Delivery.location},
+          defaults = #{Delivery.defaults}
+          WHERE id = #{Delivery.id}
+    </update>
+    <insert id="addNewDelivery">
+        INSERT INTO delivery (account, receiver, phone, province, city, district, location, defaults)
+        VALUES (#{Delivery.account}, #{Delivery.receiver}, #{Delivery.phone}, #{Delivery.province}, #{Delivery.city}, #{Delivery.district}, #{Delivery.location}, #{Delivery.defaults})
+    </insert>
 
 
 </mapper>

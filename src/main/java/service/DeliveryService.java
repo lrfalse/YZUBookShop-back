@@ -13,4 +13,10 @@ public interface DeliveryService {
     FormedData<List<Delivery>> getDeliveryList(String account);
 
     FormedData<List<Delivery>> setDefaultLocation(int id, String account);
+
+    FormedData<List<Delivery>> addNewDelivery(Delivery delivery);
+
+    FormedData<List<Delivery>> deleteDeliveryById(int id);
+
+    FormedData<List<Delivery>> updateDelivery(Delivery delivery);
 }

@@ -15,4 +15,12 @@ public interface DeliveryDao {
     Integer setDefaultTrue(@Param("id") int id);
 
     Integer setDefaultFalse(@Param("id") int id, @Param("account") String account);
+
+    Integer addNewDelivery(@Param("Delivery") Delivery delivery);
+
+    Integer setAllDefaultFalse(@Param("account") String account);
+
+    Integer deleteDeliveryById(@Param("id") int id);
+
+    Integer updateDelivery(@Param("Delivery") Delivery delivery);
 }

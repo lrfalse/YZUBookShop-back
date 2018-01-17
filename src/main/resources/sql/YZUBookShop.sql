@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2018-01-13 15:55:40
+-- Generation Time: 2018-01-17 10:52:50
 -- 服务器版本： 5.7.20
 -- PHP Version: 5.5.37
 
@@ -46,6 +46,33 @@ INSERT INTO `carousel` (`id`, `title`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `delivery`
+--
+
+CREATE TABLE IF NOT EXISTS `delivery` (
+  `id` int(11) NOT NULL,
+  `account` varchar(30) COLLATE utf8_bin NOT NULL,
+  `receiver` varchar(20) COLLATE utf8_bin NOT NULL,
+  `phone` char(11) COLLATE utf8_bin NOT NULL,
+  `province` varchar(10) COLLATE utf8_bin NOT NULL,
+  `city` varchar(10) COLLATE utf8_bin NOT NULL,
+  `district` varchar(10) COLLATE utf8_bin NOT NULL,
+  `location` varchar(30) COLLATE utf8_bin NOT NULL,
+  `defaults` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 转存表中的数据 `delivery`
+--
+
+INSERT INTO `delivery` (`id`, `account`, `receiver`, `phone`, `province`, `city`, `district`, `location`, `defaults`) VALUES
+(1, '18751103565', '徐宇嘉1', '18751103565', '江苏省', '苏州', '常熟', '古里镇紫霞花园三期6幢301', 1),
+(2, '18751103565', '徐宇嘉2', '18751103565', '江苏省', '扬州市', '邗江区', '扬子津街道扬州大学扬子津西校区', 0),
+(3, '18751103565', '徐宇嘉3', '18751103565', '江苏省', '苏州', '常熟', '古里镇珠泾苑四区151号', 0);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `news`
 --
 
@@ -77,7 +104,7 @@ INSERT INTO `news` (`id`, `title`, `description`, `iconAddress`, `webUrl`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `account` varchar(20) COLLATE utf8_bin NOT NULL,
+  `account` varchar(30) COLLATE utf8_bin NOT NULL,
   `pwd` varchar(20) COLLATE utf8_bin NOT NULL,
   `username` varchar(20) COLLATE utf8_bin NOT NULL,
   `gender` char(2) COLLATE utf8_bin NOT NULL DEFAULT '男',
@@ -90,7 +117,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`account`, `pwd`, `username`, `gender`, `phone`, `headshot`) VALUES
-('18751103565', 'aslongas1113', 'xmfy', '男', '18751103565', '');
+('18751103565', '123456', 'xyj', '男', '18751103565', 'http://192.168.1.100:8080/resources/pics/headshots/headshot1.jpg'),
+('a411919924@icloud.com', '123456', 'xmfy', '男', '18751103565', 'http://192.168.1.100:8080/resources/pics/headshots/headshot1.jpg');
 
 --
 -- Indexes for dumped tables
@@ -101,6 +129,13 @@ INSERT INTO `user` (`account`, `pwd`, `username`, `gender`, `phone`, `headshot`)
 --
 ALTER TABLE `carousel`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `delivery`
+--
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delivery_ibfk_1` (`account`);
 
 --
 -- Indexes for table `news`
@@ -124,10 +159,25 @@ ALTER TABLE `user`
 ALTER TABLE `carousel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符&&顺序',AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `delivery`
+--
+ALTER TABLE `delivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- 限制导出的表
+--
+
+--
+-- 限制表 `delivery`
+--
+ALTER TABLE `delivery`
+  ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`account`) REFERENCES `user` (`account`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

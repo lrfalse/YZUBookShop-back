@@ -98,7 +98,7 @@ public class Delivery {
         return defaults;
     }
 
-    public void setDeaults(Integer defaults) {
+    public void setDefaults(Integer defaults) {
         this.defaults = defaults;
     }
 
@@ -113,7 +113,7 @@ public class Delivery {
                 ", city='" + city + '\'' +
                 ", district='" + district + '\'' +
                 ", location='" + location + '\'' +
-                ", deaults=" + defaults +
+                ", defaults=" + defaults +
                 '}';
     }
 }
