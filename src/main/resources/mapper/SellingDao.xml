@@ -3,11 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.SellingDao">
+    <update id="updateSelling" parameterType="dto.SellingDto">
+        UPDATE selling
+        SET title = #{s.title}, author = #{s.author}, price = #{s.price}, keywords = #{s.keywords}, category1 = #{s.category1},
+        category2 = #{s.category2}, description = #{s.description}
+        WHERE id = #{s.id}
+    </update>
 
     <select id="queryByAccout" resultType="entity.Selling">
         SELECT *
         FROM selling
         WHERE account = #{account}
     </select>
+
 
 </mapper>

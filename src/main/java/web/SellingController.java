@@ -1,9 +1,11 @@
 package web;
 
+import dto.SellingDto;
 import entity.Selling;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,4 +29,11 @@ public class SellingController {
     public FormedData<List<Selling>> queryByAccount(@Param("account")String account){
         return sellingService.queryByAccount(account);
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<Integer> updateSelling(@ModelAttribute("Selling")SellingDto selling){
+        return sellingService.updateSelling(selling);
+    }
+
 }

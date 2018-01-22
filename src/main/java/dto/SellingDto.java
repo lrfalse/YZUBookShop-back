@@ -5,6 +5,7 @@ package dto;
  */
 public class SellingDto {
     private int id;
+    private String account;
     private String title;
     private String author;
     private float price;
@@ -16,8 +17,9 @@ public class SellingDto {
     public SellingDto() {
     }
 
-    public SellingDto(int id, String title, String author, float price, String keywords, int category1, int category2, String description) {
+    public SellingDto(int id, String account, String title, String author, float price, String keywords, int category1, int category2, String description) {
         this.id = id;
+        this.account = account;
         this.title = title;
         this.author = author;
         this.price = price;
@@ -33,6 +35,14 @@ public class SellingDto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getTitle() {
@@ -95,6 +105,7 @@ public class SellingDto {
     public String toString() {
         return "SellingDto{" +
                 "id=" + id +
+                ", account='" + account + '\'' +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +

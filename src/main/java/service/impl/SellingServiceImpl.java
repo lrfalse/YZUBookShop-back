@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.SellingDao;
+import dto.SellingDto;
 import entity.Selling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,15 @@ public class SellingServiceImpl implements SellingService{
         if (data != null)
             return new FormedData<>(true, data);
         return new FormedData<>(false, "数据库繁忙");
+    }
+
+    @Override
+    public FormedData<Integer> updateSelling(SellingDto selling) {
+        int result = sellingDao.updateSelling(selling);
+        if (result == 0)
+            return new FormedData<>(false, "数据库繁忙");
+        else{
+            return new FormedData<>(true, result);
+        }
     }
 }

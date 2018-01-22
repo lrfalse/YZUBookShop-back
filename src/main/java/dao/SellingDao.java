@@ -1,5 +1,6 @@
 package dao;
 
+import dto.SellingDto;
 import entity.Selling;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,4 +12,6 @@ import java.util.List;
 public interface SellingDao {
 
     List<Selling> queryByAccout(@Param("account") String account);
+
+    int updateSelling(@Param("s")SellingDto s);
 }
