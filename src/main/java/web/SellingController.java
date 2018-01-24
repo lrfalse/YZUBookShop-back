@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import service.SellingService;
 import tool.FormedData;
+import tool.ImageSaver;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -42,28 +39,20 @@ public class SellingController {
     @ResponseBody
     public FormedData<Integer> uploadPhotos(@RequestParam("img")CommonsMultipartFile[] files, @RequestParam("account") String account){
         String dirPath= System.getProperty("project.root") + "/resources/selling/" + account;
-        File dir = new File(dirPath);
-        if (!dir.exists())
-            dir.mkdir();
-        for (CommonsMultipartFile file :files){
-            try {
-                if (new File(dirPath + "/" +file.getOriginalFilename()).exists())
-                    continue;
-                FileOutputStream fos = new FileOutputStream(dirPath + "/" +file.getOriginalFilename());
-                InputStream is = file.getInputStream();
-                int b;
-                while ((b = is.read()) != -1){
-                    fos.write(b);
-                }
-                fos.flush();
-                is.close();
-                fos.close();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("--------------更新图片---------------");
-        return new FormedData<>(true, files.length);
+        int res = ImageSaver.saveMultiPhotos(files, dirPath);
+        return res == 0 ? new FormedData<>(false, "服务器繁忙") : new FormedData<Integer>(true, res);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<Integer> deleteSelling(@Param("id") int id){
+        return sellingService.deleteSellingById(id);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST, headers = ("content-type=multipart/*"), produces = {"application/json;charset=UTF-8"}, consumes = "file/*")
+    @ResponseBody
+    public FormedData<Integer> addSelling(@RequestParam("img")CommonsMultipartFile[] files, @ModelAttribute("selling") SellingDto sellingDto){
+        return sellingService.addSelling(sellingDto, files);
     }
 
 }

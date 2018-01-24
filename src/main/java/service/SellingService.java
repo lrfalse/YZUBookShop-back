@@ -2,6 +2,7 @@ package service;
 
 import dto.SellingDto;
 import entity.Selling;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import tool.FormedData;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface SellingService {
     FormedData<List<Selling>> queryByAccount(String account);
 
     FormedData<Integer> updateSelling(SellingDto selling);
+
+    FormedData<Integer> deleteSellingById(int id);
+
+    FormedData<Integer> addSelling(SellingDto selling, CommonsMultipartFile[] files);
 }

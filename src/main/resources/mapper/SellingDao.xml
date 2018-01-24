@@ -3,12 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.SellingDao">
+    <insert id="addSelling">
+        INSERT INTO selling (account, title, author, price, keywords, category1, category2, description, photoUrl)
+        VALUES (#{s.account}, #{s.title}, #{s.author}, #{s.price}, #{s.keywords}, #{s.category1}, #{s.category2}, #{s.description}, #{s.photoUrl})
+    </insert>
     <update id="updateSelling" parameterType="dto.SellingDto">
         UPDATE selling
         SET title = #{s.title}, author = #{s.author}, price = #{s.price}, keywords = #{s.keywords}, category1 = #{s.category1},
-        category2 = #{s.category2}, description = #{s.description}
+        category2 = #{s.category2}, description = #{s.description}, photoUrl = #{s.photoUrl}
         WHERE id = #{s.id}
     </update>
+    <delete id="deleteSellingById">
+        DELETE FROM selling
+        WHERE id = #{id}
+    </delete>
 
     <select id="queryByAccout" resultType="entity.Selling">
         SELECT *

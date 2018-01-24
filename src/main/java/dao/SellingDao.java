@@ -14,4 +14,8 @@ public interface SellingDao {
     List<Selling> queryByAccout(@Param("account") String account);
 
     int updateSelling(@Param("s")SellingDto s);
+
+    int deleteSellingById(@Param("id") int id);
+
+    int addSelling(@Param("s")SellingDto s);
 }

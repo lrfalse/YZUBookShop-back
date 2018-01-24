@@ -9,6 +9,7 @@ public class BannerTest {
 
     @Test
     public void run(){
-
+        String s = "/storage/emulated/0/Download/cover4.jpg";
+        System.out.println(s.substring(s.lastIndexOf("/")));
     }
 }

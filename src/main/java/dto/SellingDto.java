@@ -13,11 +13,12 @@ public class SellingDto {
     private int category1;
     private int category2;
     private String Description;
+    private String photoUrl;
 
     public SellingDto() {
     }
 
-    public SellingDto(int id, String account, String title, String author, float price, String keywords, int category1, int category2, String description) {
+    public SellingDto(int id, String account, String title, String author, float price, String keywords, int category1, int category2, String description, String photoUrl) {
         this.id = id;
         this.account = account;
         this.title = title;
@@ -27,6 +28,7 @@ public class SellingDto {
         this.category1 = category1;
         this.category2 = category2;
         Description = description;
+        this.photoUrl = photoUrl;
     }
 
     public int getId() {
@@ -101,6 +103,14 @@ public class SellingDto {
         Description = description;
     }
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
     @Override
     public String toString() {
         return "SellingDto{" +
@@ -113,6 +123,7 @@ public class SellingDto {
                 ", category1=" + category1 +
                 ", category2=" + category2 +
                 ", Description='" + Description + '\'' +
+                ", photoUrl='" + photoUrl + '\'' +
                 '}';
     }
 }
