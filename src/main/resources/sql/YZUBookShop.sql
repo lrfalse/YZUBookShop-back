@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2018-01-17 10:52:50
+-- Generation Time: 2018-01-27 11:59:22
 -- 服务器版本： 5.7.20
 -- PHP Version: 5.5.37
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `delivery` (
   `district` varchar(10) COLLATE utf8_bin NOT NULL,
   `location` varchar(30) COLLATE utf8_bin NOT NULL,
   `defaults` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- 转存表中的数据 `delivery`
@@ -96,6 +96,38 @@ INSERT INTO `news` (`id`, `title`, `description`, `iconAddress`, `webUrl`) VALUE
 (5, '经久不衰的英国经典小说', '几个世纪以来，英国小说一直影响着全球各地小说的形式', 'http://www.book110.com/wp/wp-content/uploads/2016/01/019.jpg', 'http://192.168.1.100:8080/resources/news/news5.jsp'),
 (6, '《额尔古纳河右岸》', '驯鹿民族的“百年孤独”', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515591265417&di=eeff64af7d2eca28c586c879230e4ca9&imgtype=0&src=http%3A%2F%2Fpic.lvmama.com%2Fuploads%2Fpc%2Fplace2%2F2017-04-05%2F3eed2a16-e4bf-4c92-abb1-adbb0a66e0c2.jpg', 'http://192.168.1.100:8080/resources/news/news6.jsp'),
 (7, '《唤醒内在的智慧》', '改变自己的人生道路与提升自我意识', 'http://www.book110.com/wp/wp-content/uploads/2015/12/470_120514110542_1.jpg', 'http://192.168.1.100:8080/resources/news/news7.jsp');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `selling`
+--
+
+CREATE TABLE IF NOT EXISTS `selling` (
+  `id` int(11) NOT NULL COMMENT '自增主键',
+  `account` varchar(30) COLLATE utf8_bin NOT NULL COMMENT '出售该商品的账户',
+  `title` varchar(30) COLLATE utf8_bin NOT NULL COMMENT '商品标题',
+  `author` varchar(30) COLLATE utf8_bin NOT NULL,
+  `price` float NOT NULL,
+  `description` varchar(300) COLLATE utf8_bin NOT NULL,
+  `keywords` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '关键词',
+  `photoUrl` varchar(500) COLLATE utf8_bin NOT NULL COMMENT '详情图片在服务器中的地址',
+  `category1` int(11) NOT NULL COMMENT '一级书类',
+  `category2` int(11) NOT NULL COMMENT '二级书类',
+  `createDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `onSell` int(1) NOT NULL DEFAULT '1' COMMENT '状态位 1：出售中， 0：下架',
+  `promotion` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT 'promotion' COMMENT '商品活动',
+  `views` int(11) NOT NULL DEFAULT '0' COMMENT '浏览数',
+  `collects` int(11) NOT NULL DEFAULT '0' COMMENT '收藏数'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='商品出售表';
+
+--
+-- 转存表中的数据 `selling`
+--
+
+INSERT INTO `selling` (`id`, `account`, `title`, `author`, `price`, `description`, `keywords`, `photoUrl`, `category1`, `category2`, `createDate`, `onSell`, `promotion`, `views`, `collects`) VALUES
+(1, '18751103565', '解忧杂货店', '(日)东野圭吾', 27.3, '这是一本书', '解忧 杂货铺', 'http://192.168.1.100:8080/resources/selling/18751103565/cover1.jpg http://192.168.1.100:8080/resources/selling/18751103565//cover4.jpg http://192.168.1.100:8080/resources/selling/18751103565//icon_book_sample.jpg http://192.168.1.100:8080/resources/selling/18751103565//cover2.jpg ', 1, 11, '2018-01-22 23:11:29', 1, 'promotion', 0, 0),
+(4, '18751103565', '解忧杂货铺2', '东野圭吾', 27.4, '这是第二本书', '杂货铺', 'http://192.168.1.100:8080/resources/selling/18751103565/cover1.jpg http://192.168.1.100:8080/resources/selling/18751103565//cover4.jpg http://192.168.1.100:8080/resources/selling/18751103565//icon_book_sample.jpg http://192.168.1.100:8080/resources/selling/18751103565//cover2.jpg ', 1, 11, '2018-01-26 20:55:57', 1, 'promotion', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -144,6 +176,13 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `selling`
+--
+ALTER TABLE `selling`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `account` (`account`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -162,12 +201,17 @@ ALTER TABLE `carousel`
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `selling`
+--
+ALTER TABLE `selling`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',AUTO_INCREMENT=5;
 --
 -- 限制导出的表
 --
@@ -177,6 +221,12 @@ ALTER TABLE `news`
 --
 ALTER TABLE `delivery`
   ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`account`) REFERENCES `user` (`account`);
+
+--
+-- 限制表 `selling`
+--
+ALTER TABLE `selling`
+  ADD CONSTRAINT `selling_ibfk_1` FOREIGN KEY (`account`) REFERENCES `user` (`account`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

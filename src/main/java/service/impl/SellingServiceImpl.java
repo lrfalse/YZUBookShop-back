@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.SellingDao;
+import dto.Book;
 import dto.SellingDto;
 import entity.Selling;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,11 @@ public class SellingServiceImpl implements SellingService{
             return new FormedData<>(true, results);
         return new FormedData<>(false, "数据库繁忙");
     }
+
+    @Override
+    public FormedData<List<Book>> queryBookFuzzy(String text, int size, int c1, int c2) {
+        return new FormedData<>(true, sellingDao.selectBooksFuzzy(text, size, c1, c2));
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package web;
 
+import dto.Book;
 import dto.SellingDto;
 import entity.Selling;
 import org.apache.ibatis.annotations.Param;
@@ -53,6 +54,13 @@ public class SellingController {
     @ResponseBody
     public FormedData<Integer> addSelling(@RequestParam("img")CommonsMultipartFile[] files, @ModelAttribute("selling") SellingDto sellingDto){
         return sellingService.addSelling(sellingDto, files);
+    }
+
+    @RequestMapping(value = "/fuzzyQuery", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<List<Book>> addSelling(@RequestParam("text") String text, @RequestParam("size") int size, @RequestParam("category1") Integer c1, @RequestParam("category2") Integer c2){
+        System.out.println(text + size + c1 + c2);
+        return sellingService.queryBookFuzzy(text, size, c1, c2);
     }
 
 }
