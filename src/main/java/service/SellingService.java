@@ -1,6 +1,5 @@
 package service;
 
-import dto.Book;
 import dto.SellingDto;
 import entity.Selling;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -20,6 +19,4 @@ public interface SellingService {
     FormedData<Integer> deleteSellingById(int id);
 
     FormedData<Integer> addSelling(SellingDto selling, CommonsMultipartFile[] files);
-
-    FormedData<List<Book>> queryBookFuzzy(String text, int size, int c1, int c2);
 }

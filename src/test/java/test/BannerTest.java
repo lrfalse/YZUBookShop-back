@@ -1,5 +1,6 @@
 package test;
 
+import dao.BuyDao;
 import dao.SellingDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +17,11 @@ public class BannerTest {
     @Autowired
     SellingDao sellingDao;
 
+    @Autowired
+    BuyDao buyDao;
+
     @Test
     public void run(){
-        System.out.println(sellingDao.selectBooksFuzzy("杂货铺",2,1,11));
+        System.out.println(buyDao.getBookSuggestion("title", "杂货", 5 , 1 ,11));
     }
 }

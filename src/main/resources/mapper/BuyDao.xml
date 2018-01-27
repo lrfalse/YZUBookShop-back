@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BuyDao">
+
+
+    <select id="getBookSuggestion" resultType="java.lang.String">
+        SELECT ${type}
+        FROM selling
+        WHERE ${type} LIKE CONCAT('%',#{value},'%')
+        <if test="c1!=0">
+            AND category1 = #{c1}
+        </if>
+        <if test="c2!=0">
+            AND category2 = #{c2}
+        </if>
+        <if test="size!=0">
+            LIMIT #{size}
+        </if>
+    </select>
+    <select id="getBooksByType" resultType="dto.Book">
+        SELECT id, account, title, author, price, photoUrl, category1, category2, views, collects
+        FROM selling
+        WHERE ${type} LIKE CONCAT('%',#{value},'%')
+    </select>
+
+    <select id="selectBooksFuzzy" resultType="dto.Book">
+        SELECT
+        id, account, title, author, price, photoUrl, category1, category2, views, collects
+        FROM selling
+        WHERE (title LIKE CONCAT('%',#{text},'%') OR author LIKE CONCAT('%',#{text},'%') OR keywords LIKE CONCAT('%',#{text},'%'))
+        <if test="c1!=0">
+            AND category1 = #{c1}
+        </if>
+        <if test="c2!=0">
+            AND category2 = #{c2}
+        </if>
+        ORDER BY (
+        (CASE WHEN title LIKE CONCAT('%',#{text},'%') THEN 4 ELSE 0 END)
+        + (CASE WHEN author LIKE CONCAT('%',#{text},'%')THEN 2 ELSE 0 END)
+        + (CASE WHEN keywords LIKE CONCAT('%',#{text},'%') THEN 2 ELSE 0 END )
+        ) DESC
+        <if test="size!=0">
+            LIMIT #{size}
+        </if>
+    </select>
+</mapper>
