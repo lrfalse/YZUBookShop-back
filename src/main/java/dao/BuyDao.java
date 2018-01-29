@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Book;
+import dto.SearchConditions;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface BuyDao {
 
     List<Book> selectBooksFuzzy(@Param("text") String text, @Param("size") int size, @Param("c1")int c1, @Param("c2")int c2);
 
+    List<Book> queryBooksByMultiConditions(@Param("conditions")SearchConditions conditions);
 }

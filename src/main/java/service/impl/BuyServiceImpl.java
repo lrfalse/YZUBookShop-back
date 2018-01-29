@@ -3,6 +3,7 @@ package service.impl;
 import dao.BuyDao;
 import dto.Book;
 import dto.BookSuggestion;
+import dto.SearchConditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.BuyService;
@@ -49,5 +50,14 @@ public class BuyServiceImpl implements BuyService{
     @Override
     public FormedData<List<Book>> queryBookFuzzy(String text, int size, int c1, int c2) {
         return new FormedData<>(true, buyDao.selectBooksFuzzy(text, size, c1, c2));
+    }
+
+    @Override
+    public FormedData<List<Book>> queryByMultiConditions(SearchConditions conditions) {
+        List<Book> books;
+        books = buyDao.queryBooksByMultiConditions(conditions);
+        if (books.size() == 0)
+            return new FormedData<>(false, "未找到相关书籍!");
+        return new FormedData<>(true, books);
     }
 }

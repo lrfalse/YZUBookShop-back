@@ -2,6 +2,7 @@ package service;
 
 import dto.Book;
 import dto.BookSuggestion;
+import dto.SearchConditions;
 import tool.FormedData;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface BuyService {
     FormedData<List<Book>> getBooksByType(String type, String value);
 
     FormedData<List<Book>> queryBookFuzzy(String text, int size, int c1, int c2);
+
+    FormedData<List<Book>> queryByMultiConditions(SearchConditions conditions);
 }

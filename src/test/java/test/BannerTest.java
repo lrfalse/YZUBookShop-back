@@ -2,6 +2,7 @@ package test;
 
 import dao.BuyDao;
 import dao.SellingDao;
+import dto.SearchConditions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,15 @@ public class BannerTest {
 
     @Test
     public void run(){
-        System.out.println(buyDao.getBookSuggestion("title", "杂货", 5 , 1 ,11));
+        SearchConditions conditions = new SearchConditions();
+        conditions.setType("title");
+        conditions.setValue("");
+        conditions.setC1(7);
+        conditions.setC2(71);
+        conditions.setMin(0);
+        conditions.setMax(200);
+        conditions.setSort(0);
+        conditions.setAccount("test001");
+        System.out.println(buyDao.queryBooksByMultiConditions(conditions));
     }
 }
