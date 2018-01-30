@@ -32,6 +32,7 @@ public class BannerTest {
         conditions.setMax(200);
         conditions.setSort(0);
         conditions.setAccount("test001");
-        System.out.println(buyDao.queryBooksByMultiConditions(conditions));
+//        System.out.println(buyDao.queryBooksByMultiConditions(conditions));
+        System.out.println(buyDao.queryBooks(conditions));
     }
 }

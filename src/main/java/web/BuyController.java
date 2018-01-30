@@ -1,6 +1,6 @@
 package web;
 
-import dto.Book;
+import dto.BookSearchBean;
 import dto.BookSuggestion;
 import dto.SearchConditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,15 @@ public class BuyController {
         return buyService.getBookSuggestion(value, size, c1, c2);
     }
 
-    @RequestMapping(value = "/fuzzyQuery", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/queryBooksByType", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public FormedData<List<Book>> queryBookFuzzy(@RequestParam("text") String text, @RequestParam("size") int size, @RequestParam("category1") Integer c1, @RequestParam("category2") Integer c2){
-        System.out.println(text + size + c1 + c2);
-        return buyService.queryBookFuzzy(text, size, c1, c2);
+    public FormedData<List<BookSearchBean>> fuzzyQueryBooks(@RequestParam("type") String type, @RequestParam("value") String value, @RequestParam("account") String account){
+        return buyService.queryBooksByType(type, value ,account);
     }
 
-    @RequestMapping(value = "/searchByType", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/queryBooks", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public FormedData<List<Book>> searchBooksByType1(@ModelAttribute("conditions")SearchConditions conditions){
-        return buyService.queryByMultiConditions(conditions);
+    public FormedData<List<BookSearchBean>> queryBooks(@ModelAttribute("conditions")SearchConditions conditions){
+        return buyService.queryBooks(conditions);
     }
 }

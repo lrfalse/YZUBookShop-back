@@ -3,6 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.BuyDao">
+    <update id="viewsAdd" parameterType="Integer[]">
+        UPDATE selling
+        SET views = views + 1
+        <where>
+            id <foreach collection="array" item="id" open="in (" close=")" separator=",">
+             #{id}
+            </foreach>
+        </where>
+    </update>
+    <update id="singleViewAdd">
+        UPDATE selling
+        SET views = views + 1
+        WHERE id = #{id}
+    </update>
 
 
     <select id="getBookSuggestion" resultType="java.lang.String">
@@ -19,10 +33,13 @@
             LIMIT #{size}
         </if>
     </select>
-    <select id="getBooksByType" resultType="dto.Book">
-        SELECT id, account, title, author, price, photoUrl, category1, category2, views, collects
+    <select id="getBooksByType" resultType="dto.BookSearchBean">
+        SELECT id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
         FROM selling
         WHERE ${type} LIKE CONCAT('%',#{value},'%')
+        <if test="account != null">
+            AND account != #{account}
+        </if>
     </select>
 
     <select id="selectBooksFuzzy" resultType="dto.Book">
@@ -76,4 +93,58 @@
         + (CASE WHEN keywords LIKE CONCAT('%',#{conditions.value},'%') THEN 2 ELSE 0 END )
         ) DESC
     </select>
+
+    <select id="fuzzyQueryBooks" resultType="dto.BookSearchBean">
+        SELECT
+        id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
+        FROM selling
+        WHERE (title LIKE CONCAT('%',#{text},'%') OR author LIKE CONCAT('%',#{text},'%') OR keywords LIKE CONCAT('%',#{text},'%'))
+        <if test="c1!=0">
+            AND category1 = #{c1}
+        </if>
+        <if test="c2!=0">
+            AND category2 = #{c2}
+        </if>
+        ORDER BY (
+        (CASE WHEN title LIKE CONCAT('%',#{text},'%') THEN 4 ELSE 0 END)
+        + (CASE WHEN author LIKE CONCAT('%',#{text},'%')THEN 2 ELSE 0 END)
+        + (CASE WHEN keywords LIKE CONCAT('%',#{text},'%') THEN 2 ELSE 0 END )
+        ) DESC
+        <if test="size!=0">
+            LIMIT #{size}
+        </if>
+    </select>
+
+    <select id="queryBooks" resultType="dto.BookSearchBean">
+        SELECT
+        id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{conditions.account}) isCollected
+        FROM selling
+        WHERE (title LIKE CONCAT('%',#{conditions.value},'%') OR author LIKE CONCAT('%',#{conditions.value},'%') OR keywords LIKE CONCAT('%',#{conditions.value},'%'))
+        <if test="conditions.c1 != -1">
+            AND category1 = #{conditions.c1}
+        </if>
+        <if test="conditions.c2 != -1">
+            AND category2 = #{conditions.c2}
+        </if>
+        <![CDATA[AND price >= #{conditions.min} AND price <= #{conditions.max}]]>
+        <if test="conditions.account != null">
+            AND account != #{conditions.account}
+        </if>
+        ORDER BY
+        <if test="conditions.sort == 1">
+            price ASC,
+        </if>
+        <if test="conditions.sort == 2">
+            views DESC,
+        </if>
+        <if test="conditions.sort == 3">
+            collects DESC,
+        </if>
+        ((CASE WHEN title LIKE CONCAT('%',#{conditions.value},'%') THEN 4 ELSE 0 END)
+        + (CASE WHEN author LIKE CONCAT('%',#{conditions.value},'%')THEN 2 ELSE 0 END)
+        + (CASE WHEN keywords LIKE CONCAT('%',#{conditions.value},'%') THEN 2 ELSE 0 END )
+        ) DESC
+    </select>
+
+
 </mapper>

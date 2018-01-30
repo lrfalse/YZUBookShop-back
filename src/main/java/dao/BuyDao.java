@@ -1,6 +1,6 @@
 package dao;
 
-import dto.Book;
+import dto.BookSearchBean;
 import dto.SearchConditions;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,9 +13,13 @@ public interface BuyDao {
 
     List<String> getBookSuggestion(@Param("type") String type, @Param("value")String value, @Param("size")int size, @Param("c1")int c1, @Param("c2")int c2);
 
-    List<Book> getBooksByType(@Param("type") String type, @Param("value")String value);
+    List<BookSearchBean> getBooksByType(@Param("type") String type, @Param("value")String value, @Param("account") String account);
 
-    List<Book> selectBooksFuzzy(@Param("text") String text, @Param("size") int size, @Param("c1")int c1, @Param("c2")int c2);
+    int viewsAdd(Integer[] ids);
 
-    List<Book> queryBooksByMultiConditions(@Param("conditions")SearchConditions conditions);
+    int singleViewAdd(@Param("id") int id);
+
+    List<BookSearchBean> queryBooks(@Param("conditions")SearchConditions conditions);
+
+    List<BookSearchBean> fuzzyQueryBooks(@Param("text") String text, @Param("size") int size, @Param("c1")int c1, @Param("c2")int c2, @Param("acount") String account);
 }
