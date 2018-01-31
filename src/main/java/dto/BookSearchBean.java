@@ -15,6 +15,10 @@ public class BookSearchBean {
 
     private float price;
 
+    private String keywords;
+
+    private String description;
+
     private String photoUrl;
 
     private int category1;
@@ -76,12 +80,28 @@ public class BookSearchBean {
         this.author = author;
     }
 
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
     public float getPrice() {
         return price;
     }
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPhotoUrl() {
@@ -140,6 +160,8 @@ public class BookSearchBean {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +
+                ", keywords='" + keywords + '\'' +
+                ", description='" + description + '\'' +
                 ", photoUrl='" + photoUrl + '\'' +
                 ", category1=" + category1 +
                 ", category2=" + category2 +

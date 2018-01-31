@@ -2,12 +2,15 @@ package test;
 
 import dao.BuyDao;
 import dao.SellingDao;
+import dto.BookSearchBean;
 import dto.SearchConditions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * Created by xmfy on 2018/1/4.
@@ -32,7 +35,8 @@ public class BannerTest {
         conditions.setMax(200);
         conditions.setSort(0);
         conditions.setAccount("test001");
-//        System.out.println(buyDao.queryBooksByMultiConditions(conditions));
-        System.out.println(buyDao.queryBooks(conditions));
+        List<BookSearchBean> list = buyDao.queryBooks(conditions);
+        for (BookSearchBean bookSearchBean : list)
+            System.out.println(bookSearchBean.getTitle() +"------"+bookSearchBean.getIsCollected());
     }
 }

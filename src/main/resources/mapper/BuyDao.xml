@@ -34,7 +34,7 @@
         </if>
     </select>
     <select id="getBooksByType" resultType="dto.BookSearchBean">
-        SELECT id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
+        SELECT id, account, title, author, price, description, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
         FROM selling
         WHERE ${type} LIKE CONCAT('%',#{value},'%')
         <if test="account != null">
@@ -63,40 +63,9 @@
         </if>
     </select>
 
-    <select id="queryBooksByMultiConditions" resultType="dto.Book" parameterType="dto.SearchConditions">
-        SELECT
-        id, account, title, author, price, photoUrl, category1, category2, views, collects
-        FROM selling
-        WHERE (title LIKE CONCAT('%',#{conditions.value},'%') OR author LIKE CONCAT('%',#{conditions.value},'%') OR keywords LIKE CONCAT('%',#{conditions.value},'%'))
-        <if test="conditions.c1 != -1">
-            AND category1 = #{conditions.c1}
-        </if>
-        <if test="conditions.c2 != -1">
-            AND category2 = #{conditions.c2}
-        </if>
-        <![CDATA[AND price >= #{conditions.min} AND price <= #{conditions.max}]]>
-        <if test="conditions.account != null">
-            AND account != #{conditions.account}
-        </if>
-        ORDER BY
-        <if test="conditions.sort == 1">
-          price ASC,
-        </if>
-        <if test="conditions.sort == 2">
-            views DESC,
-        </if>
-        <if test="conditions.sort == 3">
-            collects DESC,
-        </if>
-        ((CASE WHEN title LIKE CONCAT('%',#{conditions.value},'%') THEN 4 ELSE 0 END)
-        + (CASE WHEN author LIKE CONCAT('%',#{conditions.value},'%')THEN 2 ELSE 0 END)
-        + (CASE WHEN keywords LIKE CONCAT('%',#{conditions.value},'%') THEN 2 ELSE 0 END )
-        ) DESC
-    </select>
-
     <select id="fuzzyQueryBooks" resultType="dto.BookSearchBean">
         SELECT
-        id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
+        id, account, title, author, price, photoUrl, decription, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
         FROM selling
         WHERE (title LIKE CONCAT('%',#{text},'%') OR author LIKE CONCAT('%',#{text},'%') OR keywords LIKE CONCAT('%',#{text},'%'))
         <if test="c1!=0">
@@ -117,7 +86,7 @@
 
     <select id="queryBooks" resultType="dto.BookSearchBean">
         SELECT
-        id, account, title, author, price, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{conditions.account}) isCollected
+        id, account, title, author, price, description, keywords, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{conditions.account}) isCollected
         FROM selling
         WHERE (title LIKE CONCAT('%',#{conditions.value},'%') OR author LIKE CONCAT('%',#{conditions.value},'%') OR keywords LIKE CONCAT('%',#{conditions.value},'%'))
         <if test="conditions.c1 != -1">
