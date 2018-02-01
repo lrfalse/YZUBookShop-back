@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.CartDao">
+
+    <insert id="insertCart">
+        INSERT INTO cart(seller, book_id, price, buyer)
+        VALUE (#{cart.seller}, #{cart.bookId}, #{cart.price}, #{cart.buyer})
+    </insert>
+    <delete id="deleteCartById">
+        DELETE FROM cart
+        WHERE id = #{id}
+    </delete>
+    <select id="queryByAccount" resultType="entity.Cart">
+        select * from cart
+        WHERE buyer = #{buyer}
+    </select>
+
+</mapper>

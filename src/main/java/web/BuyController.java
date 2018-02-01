@@ -38,4 +38,9 @@ public class BuyController {
     public FormedData<List<BookSearchBean>> queryBooks(@ModelAttribute("conditions")SearchConditions conditions){
         return buyService.queryBooks(conditions);
     }
+
+    @RequestMapping(value = "/singleViewAdd", method = RequestMethod.GET)
+    public void singleViewAdd(@RequestParam("id")int id){
+        buyService.singleViewAdd(id);
+    }
 }

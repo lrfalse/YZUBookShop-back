@@ -16,4 +16,6 @@ public interface BuyService {
     FormedData<List<BookSearchBean>> queryBooksByType(String type, String value, String account);
 
     FormedData<List<BookSearchBean>> queryBooks(SearchConditions conditions);
+
+    void singleViewAdd(int id);
 }

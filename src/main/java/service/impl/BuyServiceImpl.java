@@ -53,4 +53,11 @@ public class BuyServiceImpl implements BuyService{
             return new FormedData<>(false, "未找到相关书籍!");
         return new FormedData<>(true, books);
     }
+
+    @Override
+    public void singleViewAdd(int id) {
+        buyDao.singleViewAdd(id);
+    }
+
+
 }
