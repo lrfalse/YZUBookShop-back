@@ -1,5 +1,6 @@
 package web;
 
+import dto.CartCollection;
 import entity.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +20,16 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @RequestMapping(value = "/queryBuyAccount", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/queryByAccount", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public FormedData<List<Cart>> queryBooks(@RequestParam("buyer") String buyer){
+    public FormedData<List<CartCollection>> queryBooks(@RequestParam("buyer") String buyer){
         return cartService.queryByAccount(buyer);
     }
 
-    @RequestMapping(value = "/insertCart", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertCart", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public int insertCart(@ModelAttribute("cart") Cart cart){
+    public FormedData<Integer> insertCart(@ModelAttribute("cart") Cart cart){
+        System.out.println("cart=========" + cart.toString());
         return cartService.insertCart(cart);
     }
 
@@ -35,5 +37,11 @@ public class CartController {
     @ResponseBody
     public int deleteById(@RequestParam("id") int id){
         return cartService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/queryBookCount", method = RequestMethod.GET)
+    @ResponseBody
+    public FormedData<Integer> deleteById(@RequestParam("buyer") String buyer){
+        return cartService.queryBookCount(buyer);
     }
 }

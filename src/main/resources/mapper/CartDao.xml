@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CartDao">
+    
+    <resultMap id="cartCollection" type="dto.CartCollection">
+        <id property="seller" column="seller"/>
+        <collection property="books" ofType="dto.BookInfo">
+            <result property="bookId" column="book_id" />
+            <result property="title" column="title"/>
+            <result property="author" column="author"/>
+            <result property="price" column="price"/>
+            <result property="category1" column="category1"/>
+            <result property="category2" column="category2"/>
+            <result property="urls" column="photoUrl"/>
+        </collection>
+    </resultMap>
 
     <insert id="insertCart">
         INSERT INTO cart(seller, book_id, price, buyer)
@@ -14,6 +27,21 @@
     </delete>
     <select id="queryByAccount" resultType="entity.Cart">
         select * from cart
+        WHERE buyer = #{buyer}
+    </select>
+    <select id="checkIfExist" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM cart
+        WHERE book_id = #{bookId} AND buyer = #{buyer}
+    </select>
+    <select id="queryCart" resultMap="cartCollection">
+      SELECT user.username as seller, cart.book_id, selling.title, selling.author, selling.price, selling.category1, selling.category2, selling.photoUrl
+      FROM user, cart, selling
+      WHERE cart.buyer = #{buyer} AND cart.book_id = selling.id AND cart.seller = user.account
+    </select>
+    <select id="queryBooksCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM cart
         WHERE buyer = #{buyer}
     </select>
 

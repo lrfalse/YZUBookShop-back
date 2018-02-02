@@ -13,6 +13,9 @@ public class Cart {
     private String buyer;
     private Date createTime;
 
+    public Cart() {
+    }
+
     public Cart(int id, String seller, int bookId, float price, String buyer, Date createTime) {
         this.id = id;
         this.seller = seller;

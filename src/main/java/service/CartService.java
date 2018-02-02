@@ -1,5 +1,6 @@
 package service;
 
+import dto.CartCollection;
 import entity.Cart;
 import tool.FormedData;
 
@@ -10,9 +11,11 @@ import java.util.List;
  */
 public interface CartService {
 
-    int insertCart(Cart cart);
+    FormedData<Integer> insertCart(Cart cart);
 
-    FormedData<List<Cart>> queryByAccount(String buyer);
+    FormedData<List<CartCollection>> queryByAccount(String buyer);
 
     int deleteById(int id);
+
+    FormedData<Integer> queryBookCount(String buyer);
 }
