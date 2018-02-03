@@ -114,6 +114,18 @@
         + (CASE WHEN keywords LIKE CONCAT('%',#{conditions.value},'%') THEN 2 ELSE 0 END )
         ) DESC
     </select>
+    <select id="queryHotBooks" resultType="dto.BookSearchBean">
+        SELECT
+        id, account, title, author, price, description, keywords, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
+        FROM selling
+        <if test="account != null">
+            WHERE account != #{account}
+        </if>
+        ORDER BY views desc, collects asc
+        <if test="size!=0">
+            LIMIT #{size}
+        </if>
+    </select>
 
 
 </mapper>

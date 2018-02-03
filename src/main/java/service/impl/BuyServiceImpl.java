@@ -59,5 +59,13 @@ public class BuyServiceImpl implements BuyService{
         buyDao.singleViewAdd(id);
     }
 
+    @Override
+    public FormedData<List<BookSearchBean>> queryHotBooks(int size, String account) {
+        List<BookSearchBean> books = buyDao.queryHotBooks(size, account);
+        if (books.size() == 0)
+            return new FormedData<>(false, "未找到相关书籍!");
+        return new FormedData<>(true, books);
+    }
+
 
 }

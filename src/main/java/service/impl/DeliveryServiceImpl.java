@@ -26,16 +26,16 @@ public class DeliveryServiceImpl implements DeliveryService {
         if (deliveryList.size() == 0)
             data = new FormedData<>(false, "请及时添加收货地址!");
         else
-            data = new FormedData<List<Delivery>>(true, deliveryList);
+            data = new FormedData<>(true, deliveryList);
         return data;
     }
 
     @Override
-    public FormedData<List<Delivery>> setDefaultLocation(int id, String account) {
-        FormedData data = new FormedData(false, "数据库繁忙，请稍后再试!");
+    public FormedData<Integer> setDefaultLocation(int id, String account) {
+        FormedData<Integer> data = new FormedData<>(false, "数据库繁忙，请稍后再试!");
         if (dao.setDefaultTrue(id) == 0 || dao.setDefaultFalse(id, account) == 0)
             return data;
-        return new FormedData<List<Delivery>>(true, dao.getDeliveryList(account));
+        return new FormedData<>(true, 1);
     }
 
     @Override

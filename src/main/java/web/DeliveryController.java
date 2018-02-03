@@ -31,7 +31,7 @@ public class DeliveryController {
 
     @RequestMapping(value = "/setDefaultLocation", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public FormedData<List<Delivery>> setDefaultLocation(@Param("id") int id, @Param("account") String account){
+    public FormedData<Integer> setDefaultLocation(@Param("id") int id, @Param("account") String account){
         return deliveryService.setDefaultLocation(id, account);
     }
 

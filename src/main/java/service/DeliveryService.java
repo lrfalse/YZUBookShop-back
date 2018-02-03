@@ -12,7 +12,7 @@ public interface DeliveryService {
 
     FormedData<List<Delivery>> getDeliveryList(String account);
 
-    FormedData<List<Delivery>> setDefaultLocation(int id, String account);
+    FormedData<Integer> setDefaultLocation(int id, String account);
 
     FormedData<List<Delivery>> addNewDelivery(Delivery delivery);
 

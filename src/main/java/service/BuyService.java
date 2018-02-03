@@ -18,4 +18,6 @@ public interface BuyService {
     FormedData<List<BookSearchBean>> queryBooks(SearchConditions conditions);
 
     void singleViewAdd(int id);
+
+    FormedData<List<BookSearchBean>> queryHotBooks(int size, String account);
 }

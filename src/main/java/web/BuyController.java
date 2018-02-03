@@ -39,6 +39,12 @@ public class BuyController {
         return buyService.queryBooks(conditions);
     }
 
+    @RequestMapping(value = "/queryHotBooks", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<List<BookSearchBean>> queryHotBooks(@RequestParam("size") int size, @RequestParam("account") String account){
+        return buyService.queryHotBooks(size, account);
+    }
+
     @RequestMapping(value = "/singleViewAdd", method = RequestMethod.GET)
     public void singleViewAdd(@RequestParam("id")int id){
         buyService.singleViewAdd(id);

@@ -22,4 +22,6 @@ public interface BuyDao {
     List<BookSearchBean> queryBooks(@Param("conditions")SearchConditions conditions);
 
     List<BookSearchBean> fuzzyQueryBooks(@Param("text") String text, @Param("size") int size, @Param("c1")int c1, @Param("c2")int c2, @Param("acount") String account);
+
+    List<BookSearchBean> queryHotBooks(@Param("size") int size, @Param("account") String account);
 }
