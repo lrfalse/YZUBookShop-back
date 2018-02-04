@@ -29,6 +29,7 @@
         <if test="c2!=0">
             AND category2 = #{c2}
         </if>
+        AND onSell = 1
         <if test="size!=0">
             LIMIT #{size}
         </if>
@@ -40,6 +41,7 @@
         <if test="account != null">
             AND account != #{account}
         </if>
+        AND onSell = 1
     </select>
 
     <select id="selectBooksFuzzy" resultType="dto.Book">
@@ -61,6 +63,7 @@
         <if test="size!=0">
             LIMIT #{size}
         </if>
+        AND onSell = 1
     </select>
 
     <select id="fuzzyQueryBooks" resultType="dto.BookSearchBean">
@@ -74,6 +77,7 @@
         <if test="c2!=0">
             AND category2 = #{c2}
         </if>
+        AND onSell = 1
         ORDER BY (
         (CASE WHEN title LIKE CONCAT('%',#{text},'%') THEN 4 ELSE 0 END)
         + (CASE WHEN author LIKE CONCAT('%',#{text},'%')THEN 2 ELSE 0 END)
@@ -99,6 +103,7 @@
         <if test="conditions.account != null">
             AND account != #{conditions.account}
         </if>
+        AND onSell = 1
         ORDER BY
         <if test="conditions.sort == 1">
             price ASC,
@@ -119,7 +124,7 @@
         id, account, title, author, price, description, keywords, photoUrl, category1, category2, views, collects, (SELECT count(1) FROM collects WHERE collects.book_id = selling.id AND collects.account = #{account}) isCollected
         FROM selling
         <if test="account != null">
-            WHERE account != #{account}
+            WHERE account != #{account} AND onSell = 1
         </if>
         ORDER BY views desc, collects asc
         <if test="size!=0">

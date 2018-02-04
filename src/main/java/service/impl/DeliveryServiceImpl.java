@@ -22,12 +22,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public FormedData<List<Delivery>> getDeliveryList(String account) {
         List<Delivery> deliveryList = dao.getDeliveryList(account);
-        FormedData<List<Delivery>> data;
-        if (deliveryList.size() == 0)
-            data = new FormedData<>(false, "请及时添加收货地址!");
-        else
-            data = new FormedData<>(true, deliveryList);
-        return data;
+        return new FormedData<>(true, deliveryList);
     }
 
     @Override

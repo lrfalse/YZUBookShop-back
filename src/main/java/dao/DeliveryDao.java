@@ -23,4 +23,6 @@ public interface DeliveryDao {
     Integer deleteDeliveryById(@Param("id") int id);
 
     Integer updateDelivery(@Param("Delivery") Delivery delivery);
+
+    Delivery getDefaultDelivery(@Param("account") String account);
 }

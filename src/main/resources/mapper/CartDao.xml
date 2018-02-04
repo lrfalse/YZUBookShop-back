@@ -5,6 +5,7 @@
 <mapper namespace="dao.CartDao">
     
     <resultMap id="cartCollection" type="dto.CartCollection">
+        <id property="sellerId" column="sellerId"/>
         <id property="seller" column="seller"/>
         <collection property="books" ofType="dto.BookInfo">
             <result property="id" column="id" />
@@ -26,6 +27,10 @@
         DELETE FROM cart
         WHERE id = #{id}
     </delete>
+    <delete id="deleteByBuyerBookId">
+        DELETE FROM cart
+        WHERE buyer = #{buyer} AND bookId IN (${bookIds})
+    </delete>
     <select id="queryByAccount" resultType="entity.Cart">
         select * from cart
         WHERE buyer = #{buyer}
@@ -36,7 +41,7 @@
         WHERE book_id = #{bookId} AND buyer = #{buyer}
     </select>
     <select id="queryCart" resultMap="cartCollection">
-      SELECT user.username as seller, cart.id, cart.book_id, selling.title, selling.author, selling.price, selling.category1, selling.category2, selling.photoUrl
+      SELECT user.account as sellerId, user.username as seller, cart.id, cart.book_id, selling.title, selling.author, selling.price, selling.category1, selling.category2, selling.photoUrl
       FROM user, cart, selling
       WHERE cart.buyer = #{buyer} AND cart.book_id = selling.id AND cart.seller = user.account
     </select>

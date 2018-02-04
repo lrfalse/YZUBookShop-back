@@ -18,4 +18,6 @@ public interface SellingDao {
     int deleteSellingById(@Param("id") int id);
 
     int addSelling(@Param("s")SellingDto s);
+
+    String getSeller(@Param("bookId") int bookId);
 }

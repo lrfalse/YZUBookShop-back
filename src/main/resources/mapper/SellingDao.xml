@@ -21,7 +21,12 @@
     <select id="queryByAccout" resultType="entity.Selling">
         SELECT *
         FROM selling
-        WHERE account = #{account}
+        WHERE account = #{account} AND onSell = 1
+    </select>
+    <select id="getSeller" resultType="java.lang.String">
+        SELECT account
+        FROM selling
+        WHERE id = #{bookId}
     </select>
 
 

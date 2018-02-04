@@ -1,6 +1,6 @@
 package test;
 
-import dao.BuyDao;
+import dao.CartDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:spring/*.xml"})
 public class BannerTest {
     @Autowired
-    BuyDao dao;
+    CartDao dao;
 
     @Test
     public void run(){
-        System.out.println(dao.queryHotBooks(10, "test001"));
+        System.out.println(dao.queryCart("test001"));
     }
 }

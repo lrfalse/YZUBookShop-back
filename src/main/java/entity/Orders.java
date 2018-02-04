@@ -7,7 +7,7 @@ public class Orders {
     private int id;
     private String buyer;
     private String seller;
-    private String bookIds;
+    private int bookId;
     private String receiver;
     private String phone;
     private String province;
@@ -20,11 +20,11 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, String buyer, String seller, String bookIds, String receiver, String phone, String province, String city, String district, String location, int flag, String note) {
+    public Orders(int id, String buyer, String seller, int bookId, String receiver, String phone, String province, String city, String district, String location, int flag, String note) {
         this.id = id;
         this.buyer = buyer;
         this.seller = seller;
-        this.bookIds = bookIds;
+        this.bookId = bookId;
         this.receiver = receiver;
         this.phone = phone;
         this.province = province;
@@ -59,12 +59,12 @@ public class Orders {
         this.seller = seller;
     }
 
-    public String getBookIds() {
-        return bookIds;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setBookIds(String bookIds) {
-        this.bookIds = bookIds;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public String getReceiver() {
@@ -137,7 +137,7 @@ public class Orders {
                 "id=" + id +
                 ", buyer='" + buyer + '\'' +
                 ", seller='" + seller + '\'' +
-                ", bookIds='" + bookIds + '\'' +
+                ", bookId=" + bookId +
                 ", receiver='" + receiver + '\'' +
                 ", phone='" + phone + '\'' +
                 ", province='" + province + '\'' +

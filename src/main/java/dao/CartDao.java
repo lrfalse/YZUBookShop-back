@@ -22,4 +22,6 @@ public interface CartDao {
     List<CartCollection> queryCart(@Param("buyer")String buyer);
 
     int queryBooksCount(@Param("buyer")String buyer);
+
+    int deleteByBuyerBookId(@Param("buyer") String buyer, @Param("bookIds") String bookIds);
 }

@@ -28,6 +28,11 @@
         FROM delivery
         WHERE account = #{account}
     </select>
+    <select id="getDefaultDelivery" resultType="entity.Delivery">
+        SELECT *
+        FROM delivery
+        WHERE account = #{account} AND defaults = 1
+    </select>
 
     <update id="setDefaultTrue">
         UPDATE delivery
