@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.DeliveryService;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 
@@ -35,6 +35,12 @@ public class DeliveryController {
         return deliveryService.setDefaultLocation(id, account);
     }
 
+    @RequestMapping(value = "/getDefaultLocation", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public FormedData<Delivery> getDefaultLocation(@Param("account") String account){
+        return deliveryService.getDefaultDelivery(account);
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public FormedData<List<Delivery>> addNewDelivery(@ModelAttribute("delivery") Delivery delivery){
@@ -50,7 +56,6 @@ public class DeliveryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public FormedData<List<Delivery>> updateDeliveryById(@ModelAttribute("delivery") Delivery delivery){
-        System.out.println("---------"+delivery);
         return deliveryService.updateDelivery(delivery);
     }
 

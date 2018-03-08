@@ -3,7 +3,7 @@ package service;
 import dto.BookSearchBean;
 import dto.BookSuggestion;
 import dto.SearchConditions;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.CarouselService;
 import service.NewsService;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

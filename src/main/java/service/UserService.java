@@ -1,7 +1,7 @@
 package service;
 
 import entity.User;
-import tool.FormedData;
+import dto.FormedData;
 
 /**
  * Created by xmfy on 2018/1/13.

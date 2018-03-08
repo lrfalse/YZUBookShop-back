@@ -1,4 +1,4 @@
-package tool;
+package dto;
 
 /**
  * Created by xmfy on 2018/1/4.

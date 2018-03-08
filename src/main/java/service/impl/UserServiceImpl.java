@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.UserService;
-import tool.FormedData;
+import dto.FormedData;
 
 /**
  * Created by xmfy on 2018/1/13.

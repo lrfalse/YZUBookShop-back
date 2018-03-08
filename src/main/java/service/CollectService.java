@@ -1,7 +1,7 @@
 package service;
 
 import entity.Selling;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

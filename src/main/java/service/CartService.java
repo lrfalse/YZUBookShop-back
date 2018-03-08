@@ -2,7 +2,7 @@ package service;
 
 import dto.CartCollection;
 import entity.Cart;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

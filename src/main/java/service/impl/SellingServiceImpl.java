@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import service.SellingService;
-import tool.FormedData;
+import dto.FormedData;
 import tool.ImageSaver;
 
 import java.util.List;

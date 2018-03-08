@@ -1,7 +1,7 @@
 package service;
 
 import entity.Delivery;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 
@@ -19,4 +19,6 @@ public interface DeliveryService {
     FormedData<List<Delivery>> deleteDeliveryById(int id);
 
     FormedData<List<Delivery>> updateDelivery(Delivery delivery);
+
+    FormedData<Delivery> getDefaultDelivery(String account);
 }

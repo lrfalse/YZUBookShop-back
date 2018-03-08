@@ -5,7 +5,7 @@ import entity.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.DeliveryService;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +49,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public FormedData<List<Delivery>> updateDelivery(Delivery delivery) {
         return dao.updateDelivery(delivery)== 0 ? new FormedData(false, "数据库繁忙，请稍后再试!") : new FormedData<List<Delivery>>(true, new ArrayList<>());
+    }
+
+    @Override
+    public FormedData<Delivery> getDefaultDelivery(String account) {
+        Delivery delivery = dao.getDefaultDelivery(account);
+        return delivery == null? new FormedData<Delivery>(false, "没有默认收货地址!") :new FormedData<Delivery>(true, delivery);
     }
 }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.UserService;
-import tool.FormedData;
+import dto.FormedData;
 
 /**
  * Created by xmfy on 2018/1/13.

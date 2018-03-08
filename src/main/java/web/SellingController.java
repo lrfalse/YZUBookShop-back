@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import service.SellingService;
-import tool.FormedData;
+import dto.FormedData;
 import tool.ImageSaver;
 
 import java.util.List;

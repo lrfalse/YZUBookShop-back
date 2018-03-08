@@ -21,5 +21,4 @@
         ORDER BY id desc
         LIMIT #{size}
     </select>
-
 </mapper>

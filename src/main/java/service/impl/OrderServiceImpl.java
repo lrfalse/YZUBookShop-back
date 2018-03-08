@@ -10,7 +10,7 @@ import entity.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.OrderService;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

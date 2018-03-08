@@ -1,7 +1,7 @@
 package service;
 
 import dto.CartCollection;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 

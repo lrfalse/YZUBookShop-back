@@ -10,6 +10,7 @@ public class User {
     private String gender;
     private String phone;
     private String headshot;
+    private float balance;
 
     public User() {
     }
@@ -69,6 +70,14 @@ public class User {
 
     public void setHeadshot(String headshot) {
         this.headshot = headshot;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
 
     @Override

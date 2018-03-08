@@ -5,7 +5,7 @@ import entity.Selling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.CollectService;
-import tool.FormedData;
+import dto.FormedData;
 
 import java.util.List;
 
