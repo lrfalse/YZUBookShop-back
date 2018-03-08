@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao">
+    <resultMap id="BaseResultMap" type="entity.User" >
+        <constructor >
+            <arg column="account" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="headshot" jdbcType="VARCHAR" javaType="java.lang.String" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        account, pwd, username, gender, phone, headshot
+    </sql>
+    <insert id="insertUser" parameterType="entity.User">
+        INSERT INTO user(account, pwd, username, gender, phone, headshot)
+        VALUES(#{user.account}, #{user.pwd}, #{user.username}, #{user.gender}, #{user.phone}, #{user.headshot})
+    </insert>
+    <select id="selectUser" resultType="entity.User">
+        SELECT *
+        FROM user
+        WHERE account = #{account} and pwd = #{pwd}
+    </select>
+
+    <update id="updateUser" parameterType="java.lang.String">
+        UPDATE user
+        SET ${key} = #{value}
+        WHERE account = #{account}
+    </update>
+
+
+</mapper>

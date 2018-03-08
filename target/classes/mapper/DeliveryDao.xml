@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.DeliveryDao">
+    <resultMap id="BaseResultMap" type="entity.Delivery" >
+        <constructor >
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="account" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="receiver" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="province" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="city" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="district" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="defaults" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, account, receiver, phone, province, city, district, location, defaults
+    </sql>
+    <delete id="deleteDeliveryById">
+        DELETE FROM delivery
+        WHERE id = #{id}
+    </delete>
+    <select id="getDeliveryList" resultType="entity.Delivery">
+        SELECT <include refid="Base_Column_List"/>
+        FROM delivery
+        WHERE account = #{account}
+    </select>
+    <select id="getDefaultDelivery" resultType="entity.Delivery">
+        SELECT *
+        FROM delivery
+        WHERE account = #{account} AND defaults = 1
+    </select>
+
+    <update id="setDefaultTrue">
+        UPDATE delivery
+        SET defaults = 1
+        WHERE id = #{id}
+    </update>
+    <update id="setDefaultFalse">
+        UPDATE delivery
+        SET defaults = 0
+        WHERE account = #{account} AND id != #{id}
+    </update>
+    <update id="setAllDefaultFalse">
+        UPDATE delivery
+        SET defaults = 0
+        WHERE account = #{account}
+    </update>
+    <update id="updateDelivery">
+        UPDATE delivery
+        SET receiver = #{Delivery.receiver},
+         phone = #{Delivery.phone},
+          province = #{Delivery.province},
+          city = #{Delivery.city},
+          district = #{Delivery.district},
+          location = #{Delivery.location},
+          defaults = #{Delivery.defaults}
+          WHERE id = #{Delivery.id}
+    </update>
+    <insert id="addNewDelivery">
+        INSERT INTO delivery (account, receiver, phone, province, city, district, location, defaults)
+        VALUES (#{Delivery.account}, #{Delivery.receiver}, #{Delivery.phone}, #{Delivery.province}, #{Delivery.city}, #{Delivery.district}, #{Delivery.location}, #{Delivery.defaults})
+    </insert>
+
+
+</mapper>
